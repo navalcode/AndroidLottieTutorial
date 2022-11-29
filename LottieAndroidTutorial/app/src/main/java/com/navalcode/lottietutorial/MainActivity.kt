@@ -15,14 +15,19 @@ class MainActivity : AppCompatActivity() {
     var like3 = false
     var like4 = false
     var like5 = false
+    var like6 = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //Listeners 5 primeros botones
         setListeners()
+        //Listener último botón.
+        //setRegularImageViewListener()
+        setRegularImageViewListenerCustomAnimation()
     }
 
-    fun setListeners() {
+    private fun setListeners() {
         likeImageView.setOnClickListener {
             like = likeAnimation(likeImageView, R.raw.bandai_dokkan, like, R.drawable.twitter_like)
         }
@@ -52,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         like: Boolean,
         endDrawable: Int
     ): Boolean {
-        return likeAnimationScale(imageView, animation, like, endDrawable)
-        //return likeAnimationAlpha(imageView, animation, like, endDrawable)
+        //return likeAnimationScale(imageView, animation, like, endDrawable)
+        return likeAnimationAlpha(imageView, animation, like, endDrawable)
     }
 
     private fun likeAnimationScale(
@@ -64,10 +69,31 @@ class MainActivity : AppCompatActivity() {
     ): Boolean {
 
         if (!like) {
-            imageView.setAnimation(animation)
+            //Animación por url
+            imageView.setAnimationFromUrl("https://assets10.lottiefiles.com/packages/lf20_g7dnFTvMeQ.json")
+
+            //Animación por recurso
+            //imageView.setAnimation(animation)
+
+            //Cambio de escala sin animación
+            //imageView.scaleX = 1.5f
+            //imageView.scaleY = 1.5f
+
+            //Cambio de escala programática con animación
+            imageView.animate().scaleX(1.5f).scaleY(1.5f).setDuration(500).setListener(object :
+                AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    imageView.animate().scaleX(1f).scaleY(1f).setDuration(500).setListener(null)
+                }
+            })
+            //Ajuste de velocidad de animación
+            imageView.speed = 5f
+
+            //Looping infinito
             //imageView.repeatCount = LottieDrawable.INFINITE
             imageView.playAnimation()
         } else {
+            //vuelta a la imagen original con animación de escalado
             imageView.animate()
                 .scaleX(0f)
                 .scaleY(0f)
@@ -118,6 +144,54 @@ class MainActivity : AppCompatActivity() {
         }
 
         return !like
+    }
+
+
+    private fun setRegularImageViewListener() {
+        like6ImageView.setOnClickListener {
+            if (!like6) {
+                like6ImageView.animate()
+                    .scaleX(1.5f)
+                    .scaleY(1.5f)
+                    .setDuration(200)
+                    .setListener(object :
+                        AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator?) {
+                            like6ImageView.setImageResource(R.drawable.chocolate_cookie)
+                            like6ImageView.animate().scaleX(1f).scaleY(1f).setDuration(200)
+                                .setListener(null)
+                        }
+                    })
+            } else {
+                like6ImageView.animate()
+                    .scaleX(0f)
+                    .scaleY(0f)
+                    .setDuration(200)
+                    .setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animator: Animator) {
+                            like6ImageView.setImageResource(R.drawable.twitter_like)
+                            like6ImageView.animate()
+                                .scaleX(1f)
+                                .scaleY(1f)
+                                .setDuration(200)
+                                .setListener(null)
+                        }
+
+                    })
+            }
+            like6 = !like6
+        }
+    }
+
+    private fun setRegularImageViewListenerCustomAnimation(){
+        like6ImageView.setOnClickListener{
+            if(!like6){
+                CustomAnimation.animateScale(like6ImageView, 1.5f, 1f, R.drawable.chocolate_cookie,200)
+            }else{
+                CustomAnimation.animateScale(like6ImageView, 0f, 1f, R.drawable.twitter_like,200)
+            }
+            like6 = !like6
+        }
     }
 
 }
