@@ -1,21 +1,17 @@
 # Android Lottie Tutorial
 
-Ejemplo de aprendizaje de animaciones en una interfaz Android con Kotlin y Views. El proyecto está en [`LottieAndroidTutorial/`](LottieAndroidTutorial/).
+[Español](README.es.md)
 
-## Qué contiene
+A Kotlin/Views animation example with Lottie interactions, scaling transitions and image changes. The Android project lives in [`LottieAndroidTutorial/`](LottieAndroidTutorial/).
 
-- Animaciones Lottie asociadas a acciones de la interfaz.
-- Transiciones de escala y cambio de imagen.
-- Una pantalla de entrada y una actividad con los ejemplos.
+## Read the code
 
-## Por dónde leerlo
+- [`MainActivity.kt`](LottieAndroidTutorial/app/src/main/java/com/navalcode/lottietutorial/MainActivity.kt): Lottie interactions.
+- [`CustomAnimation.kt`](LottieAndroidTutorial/app/src/main/java/com/navalcode/lottietutorial/CustomAnimation.kt): scale and image transitions.
+- [`SplashActivity.kt`](LottieAndroidTutorial/app/src/main/java/com/navalcode/lottietutorial/SplashActivity.kt): application entry.
 
-- [`MainActivity.kt`](LottieAndroidTutorial/app/src/main/java/com/navalcode/lottietutorial/MainActivity.kt): interacción con los ejemplos Lottie.
-- [`CustomAnimation.kt`](LottieAndroidTutorial/app/src/main/java/com/navalcode/lottietutorial/CustomAnimation.kt): transición de escala y cambio de imagen.
-- [`SplashActivity.kt`](LottieAndroidTutorial/app/src/main/java/com/navalcode/lottietutorial/SplashActivity.kt): entrada a la aplicación.
+## Toolchain and assets
 
-## Contexto
+This earlier example uses `kotlinx.android.synthetic` and needs a toolchain migration before a current build can be claimed. Template tests do not validate the animation behavior. Animation resources retain their project references and are not attributed as original artwork.
 
-Es un ejemplo histórico con el toolchain y las convenciones de su momento. Utiliza `kotlinx.android.synthetic`; su actualización y compilación con herramientas actuales están pendientes. Los tests de plantilla presentes no se presentan como una validación funcional de las animaciones.
-
-Los recursos de animación conservan sus referencias en el proyecto; su presencia no implica autoría propia de esos recursos. Para ejemplos actuales con Compose, efectos y ciclo de vida, consulta [Compose Effect Lab](https://github.com/navalcode/compose-effect-lab).
+For Compose effects and lifecycle examples with current tests, see [Compose Effect Lab](https://github.com/navalcode/compose-effect-lab).
